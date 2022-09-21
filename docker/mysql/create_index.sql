@@ -1,0 +1,6 @@
+CREATE INDEX PMID_IDX on bc2pubtator(PMID);
+SELECT 'fin PMID index', CURRENT_DATE(), CURRENT_TIME();
+CREATE INDEX TYPE_ID_IDX on bc2pubtator(Type);
+SELECT 'fin Type index', CURRENT_DATE(), CURRENT_TIME();
+CREATE INDEX ID_IDX on bc2pubtator(ID);
+SELECT 'fin ID index', CURRENT_DATE(), CURRENT_TIME();

@@ -1,0 +1,33 @@
+# https://laid-back-scientist.com/docker-mongo
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: pubtator
+    ports:
+      - 27017:27017
+    volumes:
+      - ${PWD}/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ${PWD}/../../data/mongodb_data:/data/db
+    #  - ./configdb:/data/configdb
+    #  - /Volumes/SSD-PGCU3C/work/pubtator/mongodb/mongodb_data/mongod.conf:/etc/mongod.conf
+    #command: ["mongod", "--config", "/data/db/mongod.conf"]
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo_express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongo
+    depends_on:
+      - mongo

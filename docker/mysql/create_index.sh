@@ -1,0 +1,1 @@
+mysql -u pub --password=pub pubtator --local-infile=1 < /var/lib/mysql/create_index.sql

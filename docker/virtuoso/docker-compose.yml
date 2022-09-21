@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  virtuoso:
+    image: openlink/virtuoso-opensource-7:7.2.7
+    container_name: pubtator_virtuoso
+    environment:
+      DBA_PASSWORD: "dba"
+      VIRT_Parameters_DirsAllowed: "., ../vad, /usr/share/proj, /database"
+      VIRT_Parameters_NumberOfBuffers: "1360000"
+      VIRT_Parameters_MaxDirtyBuffers: "1000000"
+      VIRT_Client_SQL_PREFETCH_ROWS: "10000"
+      VIRT_Client_SQL_PREFETCH_BYTES: "160000"
+      VIRT_SPARQL_ResultSetMaxRows: "1000000"
+      VIRT_SPARQL_MaxSortedTopRows: "100000"
+      VIRT_SPARQL_MaxQueryExecutionTime: "300"
+      VIRT_SPARQL_MaxQueryCostEstimationTime: "-1"
+    ports:
+      - 28890:8890
+      - 21111:1111
+    volumes:
+      - ${PWD}/../../data/virtuoso_data:/database
