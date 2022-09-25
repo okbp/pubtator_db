@@ -1,0 +1,2 @@
+#mysql -u pub --password=pub pubtator --local-infile=1 < /var/lib/mysql/explain_gene_count_query.sql
+mysql -u root --password=password pubtator --local-infile=1 < /var/lib/mysql/explain_gene_count_query.sql > /var/lib/mysql/explain_gene_count_query.result

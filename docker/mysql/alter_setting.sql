@@ -1,0 +1,5 @@
+use pubtator;
+SET GLOBAL local_infile=on;
+ALTER INSTANCE DISABLE INNODB REDO_LOG;
+GRANT INNODB_REDO_LOG_ENABLE ON *.* to 'pub';
+commit;
