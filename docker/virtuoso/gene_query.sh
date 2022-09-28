@@ -1,0 +1,2 @@
+/opt/virtuoso-opensource/bin/isql 1111 dba dba < /database/gene_query.sql > /database/gene_query_result.txt
+#/opt/virtuoso-opensource/bin/isql 1111 dba dba < /database/gene_query_no_group.sql > /database/gene_query_result_no_group.txt

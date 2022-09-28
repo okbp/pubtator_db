@@ -1,0 +1,1 @@
+/opt/virtuoso-opensource/bin/isql 1111 dba dba < /database/load_virtuoso.sql
