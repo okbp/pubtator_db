@@ -22,35 +22,41 @@ CREATE TABLE `pm` (
 CREATE TABLE `species` (
   `serial_id` int unsigned NOT NULL AUTO_INCREMENT,
   `PMID` varchar(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL
+  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`serial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `disease` (
   `serial_id` int unsigned NOT NULL AUTO_INCREMENT,
   `PMID` varchar(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL
+  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`serial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `chemical` (
   `serial_id` int unsigned NOT NULL AUTO_INCREMENT,
   `PMID` varchar(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL
+  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`serial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `gene` (
   `serial_id` int unsigned NOT NULL AUTO_INCREMENT,
   `PMID` varchar(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL
+  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`serial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `mutation` (
   `serial_id` int unsigned NOT NULL AUTO_INCREMENT,
   `PMID` varchar(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL
+  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`serial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `cellline` (
   `serial_id` int unsigned NOT NULL AUTO_INCREMENT,
   `PMID` varchar(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL
+  `ID` varchar(256) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`serial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

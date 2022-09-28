@@ -11,7 +11,7 @@ Dir.glob("#{output_dir}/*.tsv.sorted").sort_by {|fn| File.birthtime(fn) }.each d
 p f
   file_name = File.basename(f)
   table_name = file_name.split(".").first.split("_").first.downcase
-  command = "SELECT 'start' '#{file_name}', CURRENT_DATE(), CURRENT_TIME();"
+  command = "SELECT 'start ' '#{file_name}', CURRENT_DATE(), CURRENT_TIME();"
   out.puts command
   command = "LOAD DATA LOCAL INFILE '#{container_dir}/#{file_name}' INTO TABLE #{table_name};"
   out.puts command
@@ -23,7 +23,7 @@ p f
     end
   end
   out.puts  "ALTER TABLE #{table_name} AUTO_INCREMENT=#{seq_id.to_i + 1};"
-  command = "SELECT 'end' '#{file_name}', CURRENT_DATE(), CURRENT_TIME();"
+  command = "SELECT 'end ' '#{file_name}', CURRENT_DATE(), CURRENT_TIME();"
   out.puts command
 end
 out.flush
