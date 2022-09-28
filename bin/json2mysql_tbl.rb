@@ -34,10 +34,10 @@ require 'fileutils'
 
 #
 input_dir = File.expand_path("../../data/json/", __FILE__)
-load_file_dir_name = "load_table_files/"
+load_file_dir_name = "load_table_files"
 output_dir = File.expand_path("../../data/mysql_data/#{load_file_dir_name}/", __FILE__)
 FileUtils.mkdir_p(output_dir) unless File.exist?(output_dir)
-=begin
+
 pm_file =  File.open("#{output_dir}/pmid_list.tsv", "w")    
 output_files = {
   "Disease" => File.open("#{output_dir}/disease_list.tsv", "w"),
@@ -68,13 +68,14 @@ output_files.each do |k, v|
   v.flush
   v.close
 end
-=end
+
+# ID, PMID順にsortしたファイル(+連番付き)ファイルを生成する
 Dir.glob("#{output_dir}/*.tsv").each do |f|
   sorted_file = f.sub(".tsv", ".tsv.sorted")
   if f.include?("pmid_list.tsv")
     p "sort #{f} > #{sorted_file}"
     p Time.now
-    system("sort > #{sorted_file}")
+    system("sort #{f} > #{sorted_file}")
     
   else
     p "sort -k 2,2 -k1,1 #{f} | nl -n ln > #{sorted_file}"

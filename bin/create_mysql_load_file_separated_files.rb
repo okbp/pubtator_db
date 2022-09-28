@@ -8,8 +8,9 @@ container_dir = "/var/lib/mysql/#{load_file_dir_name}"
 
 out = File.open(load_file, "w")
 Dir.glob("#{output_dir}/*.tsv.sorted").sort_by {|fn| File.birthtime(fn) }.each do |f|
+p f
   file_name = File.basename(f)
-  table_name = file_name.split(".").fisrt.split("_").first.downcase
+  table_name = file_name.split(".").first.split("_").first.downcase
   command = "SELECT 'start' '#{file_name}', CURRENT_DATE(), CURRENT_TIME();"
   out.puts command
   command = "LOAD DATA LOCAL INFILE '#{container_dir}/#{file_name}' INTO TABLE #{table_name};"
