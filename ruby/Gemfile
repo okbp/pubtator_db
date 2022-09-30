@@ -3,4 +3,4 @@ source "https://rubygems.org"
 
 # gem "rails"
 gem "mongo", "~> 2"
-gem "sparql/client", "~> 2"
+gem 'sparql-client', '~> 3.0', '>= 3.0.1'

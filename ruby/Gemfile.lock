@@ -2,14 +2,24 @@ GEM
   remote: https://rubygems.org/
   specs:
     bson (4.15.0)
+    connection_pool (2.3.0)
+    link_header (0.0.8)
     mongo (2.18.1)
       bson (>= 4.14.1, < 5.0.0)
+    net-http-persistent (4.0.1)
+      connection_pool (~> 2.2)
+    rdf (3.2.9)
+      link_header (~> 0.0, >= 0.0.8)
+    sparql-client (3.2.1)
+      net-http-persistent (~> 4.0, >= 4.0.1)
+      rdf (~> 3.2, >= 3.2.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   mongo (~> 2)
+  sparql-client (~> 3.0, >= 3.0.1)
 
 BUNDLED WITH
    2.1.4
