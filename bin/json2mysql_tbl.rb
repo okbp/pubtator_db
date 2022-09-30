@@ -38,7 +38,7 @@ load_file_dir_name = "load_table_files"
 output_dir = File.expand_path("../../data/mysql_data/#{load_file_dir_name}/", __FILE__)
 FileUtils.mkdir_p(output_dir) unless File.exist?(output_dir)
 
-pm_file =  File.open("#{output_dir}/pmid_list.tsv", "w")    
+pm_file =  File.open("#{output_dir}/pmid_list.tsv", "w")
 output_files = {
   "Disease" => File.open("#{output_dir}/disease_list.tsv", "w"),
   "Chemical" => File.open("#{output_dir}/chemical_list.tsv", "w"),
@@ -48,7 +48,7 @@ output_files = {
   "CellLine" => File.open("#{output_dir}/cellline_list.tsv", "w")
 }
 Dir.glob("#{input_dir}/*.json").sort_by{|fn| File.birthtime(fn) }.each do |f|
-  p f 
+  p f
   data_list = JSON.parse(File.read(f))
   current_pmid = ""
 
@@ -60,7 +60,7 @@ Dir.glob("#{input_dir}/*.json").sort_by{|fn| File.birthtime(fn) }.each do |f|
     end
     pminfo = {}
     list.map{|row| {type: row["type"], id: row["id"]}}.uniq.each do |row|
-      output_files[row[:type]].puts "#{pmid}\t#{row[:id]}" 
+      output_files[row[:type]].puts "#{pmid}\t#{row[:id]}"
     end
   end
 end
@@ -76,10 +76,16 @@ Dir.glob("#{output_dir}/*.tsv").each do |f|
     p "sort #{f} > #{sorted_file}"
     p Time.now
     system("sort #{f} > #{sorted_file}")
-    
   else
-    p "sort -k 2,2 -k1,1 #{f} | nl -n ln > #{sorted_file}"
+    p "sort -k 2,2 -k1,1 #{f} | nl -n ln -w 10 > #{sorted_file}"
     p Time.now
-    system("sort -k 2,2 -k1,1 #{f} | nl -n ln > #{sorted_file}")
+    system("sort -k 2,2 -k1,1 #{f} | nl -n ln -w 10 > #{sorted_file}")
   end
+end
+
+Dir.glob("#{output_dir}/*.tsv.sorted").each do |f|
+  file_prefix = File.basename(f).split(".").first.split("_").first + "_split_"
+  split_file = File.dirname(f) + "/" + file_prefix
+  p "split -l 1000000 #{f} #{split_file}"
+  system("split -l 1000000 #{f} #{split_file}")
 end
