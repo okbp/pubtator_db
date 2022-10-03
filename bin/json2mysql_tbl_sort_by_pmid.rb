@@ -37,7 +37,7 @@ input_dir = File.expand_path("../../data/json/", __FILE__)
 load_file_dir_name = "load_table_files"
 output_dir = File.expand_path("../../data/mysql_data/#{load_file_dir_name}/", __FILE__)
 FileUtils.mkdir_p(output_dir) unless File.exist?(output_dir)
-
+=begin
 pm_file =  File.open("#{output_dir}/pm_list.tsv", "w")
 output_files = {
   "Disease" => File.open("#{output_dir}/disease_list.tsv", "w"),
@@ -68,23 +68,24 @@ output_files.each do |k, v|
   v.flush
   v.close
 end
+=end
 
-# ID, PMID順にsortしたファイル(+連番付き)ファイルを生成する
+# PMID, ID順にsortしたファイル(+連番付き)ファイルを生成する
 Dir.glob("#{output_dir}/*.tsv").each do |f|
-  sorted_file = f.sub(".tsv", ".tsv.sorted")
+  sorted_file = f.sub(".tsv", ".tsv.sorted_by_pmid")
   if f.include?("pmid_list.tsv")
     p "sort #{f} > #{sorted_file}"
     p Time.now
     system("sort #{f} > #{sorted_file}")
   else
-    p "sort -k 2,2 -k1,1 #{f} | nl -n ln -w 10 > #{sorted_file}"
+    p "sort -k 1,1 -k2,2 #{f} | nl -n ln -w 10 > #{sorted_file}"
     p Time.now
-    system("sort -k 2,2 -k1,1 #{f} | nl -n ln -w 10 > #{sorted_file}")
+    system("sort -k 1,1 -k2,2 #{f} | nl -n ln -w 10 > #{sorted_file}")
   end
 end
 
 Dir.glob("#{output_dir}/*.tsv.sorted").each do |f|
-  file_prefix = File.basename(f).split(".").first.split("_").first + "_split_"
+  file_prefix = File.basename(f).split(".").first.split("_").first + "_split_sort_by_pmid_"
   split_file = File.dirname(f) + "/" + file_prefix
   p "split -l 1000000 #{f} #{split_file}"
   system("split -l 1000000 #{f} #{split_file}")
